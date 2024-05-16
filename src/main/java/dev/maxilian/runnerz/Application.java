@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 
 import dev.maxilian.runnerz.run.Location;
 import dev.maxilian.runnerz.run.Run;
+import dev.maxilian.runnerz.run.RunRepository;
 
 @SpringBootApplication
 public class Application {
@@ -21,17 +22,18 @@ public class Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
-		log.info("Application started successfully! wrong``");
+		log.info("Application started successfully! wrong");
 	}
-	@Bean
-	CommandLineRunner runner(){
-		return args -> {
-			Run run = new Run(
-				1, "First Run", LocalDateTime.now(), 
-				LocalDateTime.now().plus(1, ChronoUnit.HOURS), 5, 
-				Location.OUTDOOR
-			);
-			log.info("Run: " + run);
-		};
-	}
+	// @Bean
+	// CommandLineRunner runner(RunRepository runRepository){
+	// 	return args -> {
+	// 		Run run = new Run(
+	// 			2, "First Run", LocalDateTime.now(), 
+	// 			LocalDateTime.now().plus(1, ChronoUnit.HOURS), 5, 
+	// 			Location.OUTDOOR
+	// 		);
+	// 		// log.info("Run: " + run);
+	// 		runRepository.create(run);
+	// 	};
+	// }
 }
