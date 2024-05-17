@@ -1,11 +1,16 @@
 package dev.maxilian.runnerz.run;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 
 public record Run(
+ // @Id
  Integer id,
 
  @NotEmpty
@@ -16,10 +21,20 @@ public record Run(
  @Positive
  Integer miles,
  Location location
+
+ // @Version
+ // Integer verion
 ) {
  public Run {
   if(!completedOn.isAfter(startedOn)){
    throw new IllegalArgumentException("Completed On must be after Started On");
   }
  }
+ public Duration getDuration() {
+  return Duration.between(startedOn,completedOn);
+}
+
+public Integer getAvgPace() {
+  return Math.toIntExact(getDuration().toMinutes() / miles);
+}
 }

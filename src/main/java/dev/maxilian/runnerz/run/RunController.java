@@ -29,10 +29,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("/api/runs")
 public class RunController {
 
- private final RunRepository runRepository;
+ private final JdbcRunRepository runRepository;
 
  // @Autowired
- public RunController(RunRepository runRepository){
+ public RunController(JdbcRunRepository runRepository){
   this.runRepository = runRepository;
  }
  
@@ -46,8 +46,8 @@ public class RunController {
 
   Optional<Run> run = runRepository.findById(id);
   if(run.isEmpty()){
-   throw new RunNotFoundException();
-   // throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Run not found.");
+   // throw new RunNotFoundException();
+   throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Run not found.");
   }
   return run.get();
   // return runRepository.findById(id);
@@ -79,4 +79,9 @@ public class RunController {
   runRepository.delete(id);
  }
 
+ @GetMapping("/location/{location}")
+ List<Run> findByLocation(@RequestParam String location){
+  return runRepository.findByLocation(location);
+ }
+ 
 }
