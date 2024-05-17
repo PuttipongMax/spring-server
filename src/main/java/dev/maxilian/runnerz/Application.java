@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 
 import dev.maxilian.runnerz.run.Location;
 import dev.maxilian.runnerz.run.Run;
-import dev.maxilian.runnerz.run.RunRepository;
+import dev.maxilian.runnerz.run.JdbcRunRepository;
 
 @SpringBootApplication
 public class Application {
@@ -24,6 +24,7 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 		log.info("Application started successfully! wrong");
 	}
+	
 	// @Bean
 	// CommandLineRunner runner(RunRepository runRepository){
 	// 	return args -> {

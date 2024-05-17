@@ -5,6 +5,7 @@ import java.io.InputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,7 @@ public class RunJsonDataLoader implements CommandLineRunner{
  private final RunRepository runRepository;
  private final ObjectMapper objectMapper;
 
- public RunJsonDataLoader(RunRepository runRepository, ObjectMapper objectMapper){
+ public RunJsonDataLoader(@Qualifier("jdbcRunRepository") RunRepository runRepository, ObjectMapper objectMapper){
   this.runRepository = runRepository;
   this.objectMapper = objectMapper;
  }
